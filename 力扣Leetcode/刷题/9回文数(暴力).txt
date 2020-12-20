@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x<0){return false;}
+        if(x<10){return true;}
+        if(x%10==0){
+            return false;
+        }
+        int k[]= new int[31],i=0,j=0;;
+        for(;x>0;i++){
+            k[i]=x%10;
+            x=x/10;
+        }
+        i-=1;
+        for(;j<i;j++,i--){
+            if(k[i]!=k[j]){
+                return false;
+            }
+        }
+        return true;
+    }
+}

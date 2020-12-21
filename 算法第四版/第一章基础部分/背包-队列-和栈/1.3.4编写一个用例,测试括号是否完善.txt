@@ -1,0 +1,34 @@
+package four.one_three;
+
+import java.util.Scanner;
+import java.util.Stack;
+
+public class ZHOU1_3_4 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);//暂时还没使用自定义输入函数,也没使用自己定以的内
+        String s = scanner.next();
+        scanner.close();
+        Stack<Character> stack = new Stack<Character>();
+        int N = s.length();
+        if(N==1) {System.out.println("是错误的"); return ;}
+        char tmp;
+        for(int i = 0;i<N;i++) {
+            tmp = s.charAt(i);
+            if(tmp=='('||tmp=='['||tmp=='{') {//向右开口的加进去
+                stack.add(tmp); continue;
+            }
+            if(stack.isEmpty()) {//不是左括号,那么肯定是右括号.又括号居然没有左括号克用了,那么肯定炸了
+                System.out.println("是错的哦");
+                return;
+            }
+            if(tmp==')'&&stack.pop()!='(') {  System.out.println("是错的哦"); return;}
+            if(tmp=='}'&&stack.pop()!='{') {  System.out.println("是错的哦"); return;}
+            if(tmp==']'&&stack.pop()!='[') {  System.out.println("是错的哦"); return;}
+        }
+        if(stack.isEmpty()) {
+            System.out.println("是对的哦");
+        }else {
+            System.out.println("是错的哦");
+        }
+    }
+}

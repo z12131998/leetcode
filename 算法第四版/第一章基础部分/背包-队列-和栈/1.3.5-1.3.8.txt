@@ -1,0 +1,20 @@
+1.3.5当n为50时，以下代码片段输出什么？对使用正整数n表示时的操作进行高级描述。
+Stack <Integer> s =新的Stack <Integer>（）;
+而（n> 0）{
+   s.push（n％2）;
+   n = n / 2;
+}
+而（！s.isEmpty（））
+    System.out.print（s.pop（））;
+System.out.println（）;
+答:转换成二进制
+
+1.3.6以下代码片段对队列q有什么作用？
+Stack <String> s =新的Stack <String>（）;
+while（！q.isEmpty（））
+   s.push（q.dequeue（））;
+while（！s.isEmpty（））
+   q.enqueue（s.pop（））;
+答：撤消队列中的项目。
+1.3.7 过于简单略
+1.3.8 过于简单略

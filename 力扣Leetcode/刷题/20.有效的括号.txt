@@ -1,0 +1,24 @@
+class Solution {//给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
+    public boolean isValid(String s) {
+        char[] a = s.toCharArray();
+        char[] b= new char[a.length];
+        int N=0;
+        for(int i=0;i<a.length;i++){
+            if(a[i]=='('||a[i]=='{'||a[i]=='['){
+                b[N++]=a[i]; continue;
+            }
+            if(N==0){return false;}//这里表示已经没有开口向右的括号了
+            if(a[i]==')'&&!(b[N-1]=='(')){
+                return false;
+            }  
+             if(a[i]=='}'&!(b[N-1]=='{')){
+                return false;
+            }     
+             if(a[i]==']'&&!(b[N-1]=='[')){
+                return false;
+            }     
+            N--;             
+           }
+                   return N==0;
+        }
+    }

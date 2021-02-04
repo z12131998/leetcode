@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public void flatten(TreeNode root) {
+        if(root==null){
+            return ;
+        }
+        flatten(root.left);
+        flatten(root.right);
+
+        TreeNode A=root,B=root.right;//记录当前根和右节点,把右节点放到最下面
+        root.right=root.left;
+        root.left=null;
+        while(A.right!=null){//右节点放到最下面
+            A=A.right;
+        }
+        A.right=B;
+    }
+
+}

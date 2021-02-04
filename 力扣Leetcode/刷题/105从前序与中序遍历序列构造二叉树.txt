@@ -1,0 +1,39 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ //由前序遍历可知第一个为根
+ //中序遍历到前边的为左X树
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        return build(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
+    }
+    private TreeNode build(int[]preorder,int k1,int k2,int[]inorder,int k3,int k4){
+        if(k1>k2||k3>k4){
+            return null;
+        }
+        int root = preorder[k1],i=k3, left;
+        TreeNode treeRoot = new TreeNode(root);//获取根
+        //找到中序遍历左边的分支
+        while(preorder[k1]!=inorder[i]){
+            i++;
+        }
+        left=i-k3;//获取左节点的数目
+        //把前序遍历左边以级中序遍历左边放进去
+        treeRoot.left=build(preorder,k1+1,k1+left,inorder,k3,i-1);
+        //把前序遍历右边的放进去和中序右边的
+        treeRoot.right=build(preorder,k1+1+left,k2,inorder,i+1,k4);
+        return treeRoot;
+    }
+}

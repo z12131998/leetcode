@@ -1,0 +1,31 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {//递归思想
+ListNode tmp;
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if(m==1){
+            return reverseN(head,n);
+        }
+        head.next = reverseBetween(head.next,m-1,n-1);
+        return head;
+        
+    }//反转前N链表
+    private ListNode reverseN(ListNode head,int m){
+        if(m==1){
+            tmp=head.next;
+            return head;//找到后面的
+        }
+        ListNode last = reverseN(head.next,m-1);//找到最后一个
+        head.next.next=head;//反转
+        head.next=tmp;//反转加尾巴
+        return last;
+    }
+}

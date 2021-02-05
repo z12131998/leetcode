@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {//迭代
+ListNode tmp;
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+    ListNode a = new ListNode(0);
+    a.next=head;
+    ListNode tmp=a;
+    for(int i =1;i<m;i++){//找到开始的结点前的位置
+    tmp=tmp.next;
+    }
+    head=tmp.next;//找到开始节点的位置
+    for(int i=m;i<n;i++){//替换n到m的节点
+    ListNode nex = head.next;//交换并不是22交换,要考虑他们的前后
+    head.next=nex.next;//
+    nex.next=tmp.next;//
+    tmp.next=nex;//
+    }
+   return a.next;
+}}

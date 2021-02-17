@@ -1,0 +1,49 @@
+package algorithm;
+
+public class Union_Find {
+    private int count;//记录连通份量
+    private int[] parent;//节点X的节点是parent[X]
+    private int[] size;
+    //构造函数
+    public Union_Find(int N) {
+        this.count = N;
+        parent = new int[N];
+        
+        for(int i =0;i<N;i++) {
+            parent[i]=i;
+            size[i]=i;
+        }
+    }
+    //连接二个节点
+    public void union1(int p,int q) {
+        int rootP = find_1(p);//找到各自的根节点
+        int rootQ = find_1(q);//找到各自的根节点
+        if(rootP==rootQ) {
+            return ;//一样的,那么他们已经连接了
+        }
+        //如果不一样 那么把左边的丢到右边去
+        if(size[rootP]>size[rootQ]) {
+            parent[rootP]=rootQ;
+            size[rootP]+=size[rootQ];
+        }else {
+            parent[rootQ]=rootP;
+            size[rootQ]+=size[rootP];
+        }
+        count--;
+    }
+    
+    //返回某个节点的根节点
+    public int find_1(int x) {
+        while(parent[x]!=x) {
+//            x=parent[x]; 开始进行压缩
+            parent[x]=parent[parent[x]];//把值变成前面的父亲
+            x=parent[x];//节点不超过3个
+        }
+        return x;
+    }
+    public int count() {
+        return count;
+    }
+    
+}
+

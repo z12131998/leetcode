@@ -1,0 +1,14 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        if(s==null||t==null){
+            return false;
+        }
+        int tmp1=-1;
+        char[] a = s.toCharArray();
+        for(char item: a){
+           tmp1=t.indexOf(item,tmp1+1);
+           if(tmp1==-1) return false;
+        }
+        return true;
+    }
+}

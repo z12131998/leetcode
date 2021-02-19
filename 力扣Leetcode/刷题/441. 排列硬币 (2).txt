@@ -1,0 +1,19 @@
+class Solution {
+    public int arrangeCoins(int n) {
+        if(n==0){
+            return 0;
+        }
+        int left=1,right =n,mid=1;
+        while(left<=right){ //注意溢出的问题,还有经过计算后的结果再计算一次的问题
+            mid = (left+right)>>>1;
+            if((long)mid*(1+mid)==(long)n*2){
+                return mid;
+            }else if((long)mid*(1+mid)>(long)n*2){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return (long)mid*(1+mid)>(long)n*2?mid-1:mid;
+    }
+}

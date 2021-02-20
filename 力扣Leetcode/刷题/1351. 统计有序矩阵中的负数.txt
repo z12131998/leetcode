@@ -1,0 +1,19 @@
+class Solution {
+    public int countNegatives(int[][] grid) {
+        int i=0;
+        for(int[] item: grid){
+            int left = 0,right = item.length-1;
+            int max=right,mid;
+            while(left<=right){
+                mid=(left+right)>>>1;
+                if(item[mid]>=0){
+                    left=mid+1;
+                }else{
+                    right=mid-1;
+                }
+            }
+            i+=(max-right);
+        }
+        return i;
+    }
+}

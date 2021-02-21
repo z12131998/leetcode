@@ -1,0 +1,24 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+      Set<Integer> set = new HashSet<Integer>();
+      for(int item: nums){
+          if(set.contains(item)){
+              return item;
+          }else{
+          set.add(item);
+          }
+      }
+      return 0;
+    }
+}
+//class Solution {
+    public int findDuplicate(int[] nums) {
+      Arrays.sort(nums);
+      for(int i=0;i<nums.length-1;i++){
+          if(nums[i]==nums[i+1]){
+              return nums[i];
+          }
+      }
+      return 0;
+    }
+}

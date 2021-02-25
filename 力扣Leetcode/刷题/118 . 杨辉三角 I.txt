@@ -1,0 +1,25 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> list =  new ArrayList<>();
+        int[][] tmp = new int[numRows+1][numRows+1];
+        tmp[1][1]=1;
+        List<Integer> subList = new ArrayList<>();
+        subList.add(tmp[1][1]);
+        list.add(subList);
+            for(int i=2;i<=numRows;i++){
+                subList = new ArrayList<>();
+                for(int j=1;j<=i;j++){
+                    if(j==1||j==i){
+                        tmp[i][j]=1;
+                        subList.add(tmp[i][j]);
+                        continue;
+                    }
+                    tmp[i][j]=tmp[i-1][j-1]+tmp[i-1][j];
+                    subList.add(tmp[i][j]);
+                }
+                list.add(subList);
+        }
+        tmp=null;
+        return list;
+    }
+}

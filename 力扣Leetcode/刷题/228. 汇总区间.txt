@@ -1,0 +1,26 @@
+class Solution {
+    public List<String> summaryRanges(int[] nums) {
+       List<String> list = new ArrayList<String>(); //每次都有[]来恶心人是吧
+               if(nums.length==0){
+            return list;
+        }
+       int A=0,i=0;
+       for(;i<nums.length-1;){
+           if(nums[i]+1!=nums[i+1]){
+               if(i==A){
+                   list.add(nums[A]+"");
+               }else{
+               list.add(new String(nums[A]+"->"+nums[i]));}
+               A=++i;
+           }else{
+              i++;
+           }
+       }
+        if(A!=i){
+            list.add(new String(nums[A]+"->"+nums[i]));
+        }else if(A==i){
+            list.add(nums[A]+"");
+        }
+       return list;
+    }
+}

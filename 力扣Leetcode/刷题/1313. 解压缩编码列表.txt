@@ -1,0 +1,16 @@
+class Solution {
+    public int[] decompressRLElist(int[] nums) {
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i=0,j=1;j<nums.length;j+=2,i+=2){
+            for(int tmp1=nums[i];tmp1>0;tmp1--){
+                list.add(nums[j]);
+            }
+        }
+        int[] res = new int[list.size()];
+        int k=0;
+        for(Integer i:list){
+            res[k++]=i;
+        }
+        return res;
+    }
+}

@@ -1,0 +1,49 @@
+class Solution {
+    public String dayOfTheWeek(int day, int month, int year) {
+        String[] res = new String[7];
+        res[1]="Monday";
+        res[2]="Tuesday";
+        res[3]="Wednesday";
+        res[4]="Thursday";
+        res[5]="Friday";
+        res[6]="Saturday";
+        res[0]="Sunday";
+        int[] sumYue = new int[12];
+        sumYue[0]=0;
+        sumYue[1]=31;
+        sumYue[2]=28+sumYue[1];
+        sumYue[3]=31+sumYue[2];
+        sumYue[4]=30+sumYue[3];
+        sumYue[5]=31+sumYue[4];
+        sumYue[6]=30+sumYue[5];
+        sumYue[7]=31+sumYue[6];
+        sumYue[8]=31+sumYue[7];
+        sumYue[9]=30+sumYue[8];
+        sumYue[10]=31+sumYue[9];
+        sumYue[11]=30+sumYue[10];
+        int y =1971;//Y=1971年
+        int theDay = 5;//1971年1月1日是星期五
+        while(y<year){
+            if(y%400==0){
+                theDay=(366%7+theDay)%7;
+                y++;
+                continue;
+            }
+            if(y%4==0&&y%100!=0){
+                  theDay=(366%7+theDay)%7;
+                  y++;
+            }else{
+                theDay=(365%7+theDay)%7;
+                y++;
+            }
+        }//计算yare第一年一月一日是星期几
+        theDay=(sumYue[month-1]+theDay)%7;
+        if(month>2){
+            if(year%400==0||(year%4==0&&y%100!=0)){
+                theDay=(theDay+1)%7;
+        }
+        }
+        theDay=(theDay+day-1)%7;
+    return res[theDay];
+    }
+}

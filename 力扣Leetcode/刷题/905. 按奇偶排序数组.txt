@@ -1,0 +1,14 @@
+class Solution {
+    public int[] sortArrayByParity(int[] A) {
+        int i=0,j=A.length-1;
+        int[] res = new int[A.length];
+        for(int item:A){
+            if(item%2==0){
+                res[i++]=item;
+            }else{
+                res[j--]=item;
+            }
+        }
+        return res;
+    }
+}

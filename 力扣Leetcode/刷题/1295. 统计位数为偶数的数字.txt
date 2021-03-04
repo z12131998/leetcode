@@ -1,0 +1,15 @@
+class Solution {
+    public int findNumbers(int[] nums) {
+        int res =0;
+        for(int item:nums){
+           if(item>=10&&item<=99){
+               res++;
+               continue;
+           }
+           if((item>=1000&&item<=9999)||(item>=100000&&item<=999999)){
+               res++;
+           }
+        }
+        return res;
+    }
+}

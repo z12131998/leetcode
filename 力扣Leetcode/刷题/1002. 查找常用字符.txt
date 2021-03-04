@@ -1,0 +1,28 @@
+class Solution {
+    public List<String> commonChars(String[] A) {
+        List<String> res = new ArrayList<String>();
+        int[] k = new int[26];
+        char[] tmp = A[0].toCharArray();
+        for(int i=0;i<tmp.length;i++){
+            k[tmp[i]-'a']++;
+        }
+        for(int i=1;i<A.length;i++){
+            tmp=A[i].toCharArray();
+            int[] k1 = new int[26];
+            for(int j=0;j<tmp.length;j++){
+                k1[tmp[j]-'a']++;
+                  }
+            for(int m=0;m<k.length;m++){
+                k[m]=Math.min(k[m],k1[m]);
+            }
+        }
+        for(int i=0;i<k.length;i++){
+            if(k[i]!=0){
+               for(int j=1;j<=k[i];j++){
+                    res.add((char)(i+'a')+"");
+               }
+            }
+        }
+        return res;
+    }
+}

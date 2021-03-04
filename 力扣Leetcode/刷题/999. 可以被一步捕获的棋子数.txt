@@ -1,0 +1,47 @@
+class Solution {
+    public int numRookCaptures(char[][] board) {
+        int res =0;
+        int[]  k = new int[2];
+        for(int i =0;i<board.length;i++){
+            for(int j=0;j<board[i].length;j++){
+                if(board[i][j]=='R'){
+                    k[0]=i;
+                    k[1]=j;
+                }
+            }
+        }
+        for(int i=k[0];i>=0;i--){
+            if(board[i][k[1]]=='p'){
+                res++;
+                break;
+            }else if(board[i][k[1]]=='B'){
+                break;
+            }
+        }
+        for(int i=k[0];i<board.length;i++){
+            if(board[i][k[1]]=='p'){
+                res++;
+                break;
+            }else if(board[i][k[1]]=='B'){
+                break;
+            }
+        }
+        for(int i=k[1];i>=0;i--){
+            if(board[k[0]][i]=='p'){
+                res++;
+                break;
+            }else if(board[k[0]][i]=='B'){
+                break;
+            }
+        }
+         for(int i=k[1];i<board.length;i++){
+            if(board[k[0]][i]=='p'){
+                res++;
+                break;
+            }else if(board[k[0]][i]=='B'){
+                break;
+            }
+        }
+        return res;
+    }
+}

@@ -1,0 +1,24 @@
+class Solution {
+    public String makeGood(String s) {
+        StringBuilder res = new StringBuilder();
+        int index=0;
+        char tmp1,tmp2;
+        for(int i=0;i<s.length();i++){//不想优化了
+            if(index-1>=0){
+                tmp1=res.charAt(index-1);
+                tmp2=s.charAt(i);
+                if(Math.abs(tmp1-tmp2)==32){
+                    res.delete(index-1,index);
+                    index--;
+                }else{
+                res.append(s.charAt(i));
+                index++;
+            }
+            }else{
+                res.append(s.charAt(i));
+                index++;
+            }
+        }
+        return res.toString();
+    }
+}

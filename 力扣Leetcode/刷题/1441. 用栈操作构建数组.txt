@@ -1,0 +1,15 @@
+class Solution {
+    public List<String> buildArray(int[] target, int n) {
+        List<String> res = new LinkedList<String>();
+         for(int i=1,j=0;i<=n&&j<target.length;i++){
+             if(i<target[j]){
+                 res.add("Push");
+                 res.add("Pop");
+             }else if(i==target[j]){
+                 j++;
+                 res.add("Push");
+             }
+         }
+         return res;
+    }
+}

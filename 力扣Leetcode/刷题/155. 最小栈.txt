@@ -1,0 +1,43 @@
+class MinStack {
+    int index=0;
+    int min=Integer.MAX_VALUE;
+    int[] item;
+    /** initialize your data structure here.pop、top 和 getMin 操作总是在 非空栈 上调用。 */ 
+    public MinStack() {
+        item=new int[10000];
+    }
+    
+    public void push(int x) {
+        min=Math.min(x,min);
+        item[index++]=x;
+    }
+    
+    public void pop() {
+        item[--index]=0;
+        if(index!=0){
+            min=item[index-1];
+        }else{
+            min=Integer.MAX_VALUE;
+        }
+        for(int i=0;i<index;i++){
+            min=Math.min(min,item[i]);
+        }
+    }   
+    
+    public int top() {
+        return item[index-1];
+    }
+    
+    public int getMin() {
+        return min;
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */

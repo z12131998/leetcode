@@ -1,0 +1,35 @@
+class Solution {
+    public List<Boolean> prefixesDivBy5(int[] A) {
+        List<Boolean> res = new ArrayList<>();
+        int tmp=A[0];
+        if(tmp==0){
+            res.add(true);
+        }else{
+            res.add(false);
+        }
+        for(int i=1;i<A.length;i++){
+             if(A[i]==0){
+                 tmp=tmp<<1;
+                 if(tmp/100000!=0){
+                     tmp=tmp%10000;
+                 }
+                 if(tmp%5==0){
+                     res.add(true);
+                 }else{
+                     res.add(false);
+                 }
+             }else{
+                 tmp=(tmp<<1)+1;
+                 if(tmp/100000!=0){
+                     tmp=tmp%10000;
+                 }
+                 if(tmp%5==0){
+                     res.add(true);
+                 }else{
+                     res.add(false);
+                 }
+             }
+        }
+        return res;
+    }
+}

@@ -1,0 +1,16 @@
+class Solution {
+    public int minOperations(String[] logs) {
+        int res=0;
+        Stack<String> stack = new Stack<>();
+        for(String item: logs){
+            if(item.equals("../")){
+                if(res!=0){res--;}
+            } else if(item.equals("./")){
+
+            }else{
+                res++;
+            }
+        }
+        return res;
+    }
+}

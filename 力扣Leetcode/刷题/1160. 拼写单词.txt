@@ -1,0 +1,40 @@
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        int res =0;
+        Map<Character,Integer> map = new HashMap<>();
+        for(int i=0;i<chars.length();i++){//存入hash
+            if(map.containsKey(chars.charAt(i))){
+                map.put(chars.charAt(i),map.get(chars.charAt(i))+1);
+            }else{
+                map.put(chars.charAt(i),1);
+            }
+        }
+        //新建哈希判断
+        for(String item: words){
+            Map<Character,Integer> tmp = new HashMap<>();
+            for(int i=0;i<item.length();i++){
+                 if(tmp.containsKey(item.charAt(i))){
+                tmp.put(item.charAt(i),tmp.get(item.charAt(i))+1);
+            }else{
+                tmp.put(item.charAt(i),1);
+            }
+            }
+            //--------
+            int sum=0;//sum2用于判断是否字母数是一样的
+                for(Character c:tmp.keySet()){//首先判断单词是否在里面,如果在就加起来
+                if(!map.containsKey(c)){
+                break;
+                }
+                else if(tmp.get(c)<=map.get(c)){
+                    sum+=tmp.get(c);
+                }else{
+                    break;
+                }
+            }
+            if(item.length()==sum){
+                res+=sum;
+            }
+       }
+       return res;
+    }
+}

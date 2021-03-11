@@ -1,0 +1,34 @@
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+      Map<Character,Integer> map  = new HashMap<>();
+      for(int i=0;i<order.length();i++){
+          map.put(order.charAt(i),i+1);
+      }  
+      int[] tmp = new int[101];
+      int len = words[0].length();
+      for(int i=0;i<words[0].length();i++){
+          tmp[i]=map.get(words[0].charAt(i));
+      }
+      for(String str:words){
+          int i=0;
+          for(;i<str.length();i++){
+              if(tmp[i]==map.get(str.charAt(i))){
+                  continue;
+              }else if(tmp[i]<map.get(str.charAt(i))){
+                tmp[i]=map.get(str.charAt(i));//如果不是一样的  那么判断是否字母表的位置在上
+                break;
+              }else{
+                  return false;
+              }
+          }
+        if(i==str.length()){
+            if(len>i){
+                return false;
+            }else{
+                len=i;
+            }
+        }
+      }
+      return true;
+    }
+}

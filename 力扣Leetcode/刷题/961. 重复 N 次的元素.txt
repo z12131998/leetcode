@@ -1,0 +1,6 @@
+class Solution {
+    public int repeatedNTimes(int[] A) {
+        Arrays.sort(A);//重复了N次，数组为2N 说明中间一段或者前面一段是  如果中间等于最后。那么返回N,如果不是最后那么放回N-1
+         return A[A.length/2]==A[A.length-1]?A[A.length/2]:A[A.length/2-1];
+    }
+}

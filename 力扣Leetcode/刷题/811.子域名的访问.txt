@@ -1,0 +1,39 @@
+class Solution {
+    public List<String> subdomainVisits(String[] cpdomains) {
+        List<String> res = new ArrayList<>();
+        Map<String,Integer> mapCount = new HashMap<>();
+        for(String item: cpdomains){
+            int cishu = Integer.parseInt(item.substring(0,item.indexOf(' ')));
+            String minTmp = item.substring(item.indexOf(' ')+1,item.length());
+            String lastTmp1=item.substring(item.lastIndexOf('.')+1,item.length());
+            String lastTmp2 =null;
+            if(item.lastIndexOf('.',item.lastIndexOf('.')-1)!=-1){
+                lastTmp2=item.substring(item.lastIndexOf('.',item.lastIndexOf('.')-1)+1,item.length());
+            }
+            if(mapCount.containsKey(minTmp)){
+                mapCount.put(minTmp,mapCount.get(minTmp)+cishu);
+            }else{
+                mapCount.put(minTmp,cishu);
+            }
+            //last域名
+            if(mapCount.containsKey(lastTmp1)){
+                mapCount.put(lastTmp1,mapCount.get(lastTmp1)+cishu);
+            }else{
+                mapCount.put(lastTmp1,cishu);
+            }
+            //倒数第二
+            if(lastTmp2!=null){
+            if(mapCount.containsKey(lastTmp2)){
+                mapCount.put(lastTmp2,mapCount.get(lastTmp2)+cishu);
+            }else{
+                mapCount.put(lastTmp2,cishu);
+            }
+            }
+        }
+        for(String key: mapCount.keySet()){
+            String str=mapCount.get(key)+" "+key;
+            res.add(str);
+        }
+        return res;
+    }
+}

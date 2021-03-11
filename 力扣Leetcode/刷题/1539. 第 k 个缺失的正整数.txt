@@ -1,0 +1,26 @@
+class Solution {
+    public int findKthPositive(int[] arr, int k) {
+        int res=0,jishu=0;
+        int[] tmp = new int[arr[arr.length-1]];
+        int i=0,j=0;
+        for(;i<tmp.length&&k!=jishu;i++){
+            if(i+1==arr[j]){
+                j++;
+            }else{
+                res=i+1;
+                jishu++;
+            }
+        }
+        if(j==i){
+            return arr[arr.length-1]+k;
+        }
+        if(jishu<k){
+            res=arr[arr.length-1];
+        }
+        while(jishu<k){
+            res++;
+            jishu++;
+        }
+        return res;
+    }
+}

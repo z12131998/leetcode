@@ -1,0 +1,17 @@
+class Solution {
+    public int sumOfUnique(int[] nums) {
+        int res =0;
+        int[] tmp = new int[101];
+        for(int i=0;i<nums.length;i++){
+            if(tmp[nums[i]]==0){
+                res+=nums[i];
+                tmp[nums[i]]++;
+            }
+            else if(tmp[nums[i]]==1){
+                res-=nums[i];
+                tmp[nums[i]]++;
+            }
+        }
+        return res;
+    }
+}

@@ -1,0 +1,29 @@
+
+class Solution {
+    public String[] uncommonFromSentences(String A, String B) {
+        String[] a = A.split(" ");
+        String[] b = B.split(" ");
+        Map<String,Integer> map1 = new HashMap<>();//又臭又长的代码2
+        List<String> list = new ArrayList<>();
+        for(String str: a){
+            if(!map1.containsKey(str)){
+                map1.put(str,1);
+            }else{
+                map1.put(str,map1.get(str)+1);
+            }
+        }
+        for(String str:b){
+             if(!map1.containsKey(str)){
+                map1.put(str,1);
+            }else{
+                map1.put(str,map1.get(str)+1);
+            }
+        }
+        for(String str:map1.keySet()){
+            if(map1.get(str)==1){
+                list.add(str);
+            }
+        }
+        return list.toArray(new String[list.size()]);
+    }
+}

@@ -1,0 +1,24 @@
+class Solution {
+    public int getMaximumGenerated(int n) {
+        int max =0;
+        if(n==0){
+            return 0; 
+        }
+        if(n==1||n==2){
+            return 1;
+        }
+        int tmp[] = new int[n+1];
+        tmp[0]=0;
+        tmp[1]=1;
+        tmp[2]=1;
+        for(int i=3;i<=n;i++){
+            if(i%2==1){
+                tmp[i]=tmp[i/2]+tmp[i/2+1];
+            }else{
+                tmp[i]=tmp[i/2];
+            }
+            max=Math.max(max,tmp[i]);
+        }
+        return max;
+    }
+}

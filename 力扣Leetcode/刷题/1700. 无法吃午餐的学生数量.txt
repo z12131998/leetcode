@@ -1,0 +1,30 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        int res = students.length;
+        int j=0,n=0;//N为统计是否环循环了二次
+        for(int i=0;i<sandwiches.length;){
+            n=0;
+            for(;n<2;j++){
+                if(j==students.length){//如果到底了，那么重置j 并且n计数器+1;
+                    j=0;
+                    n++;
+                }
+                if(students[j]==-1){//学生已经买过
+                    continue;
+                }
+                if(sandwiches[i]==students[j]){//学生爱好和当前售卖相同
+                    res--;
+                    students[j++]=-1;
+                    break;
+                }
+            }
+            //内部循环了二次没找到适合的学生
+            if(n==2){
+                break;
+            }else{
+                i++;
+            }
+        }
+        return res;
+    }
+}

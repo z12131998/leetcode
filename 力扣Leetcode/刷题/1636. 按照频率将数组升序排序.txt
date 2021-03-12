@@ -1,0 +1,24 @@
+class Solution {
+    public int[] frequencySort(int[] nums) {
+        int[][] tmp = new int[201][2];
+        for(int item:nums){
+            tmp[item+100][0]++;
+            tmp[item+100][1]=item;
+        }
+        Arrays.sort(tmp,new Comparator<int[]>(){
+            public int compare(int[] o1, int[] o2){
+                if(o1[0]==o2[0]){
+                    return o2[1]-o1[1];
+                }
+                return o1[0]-o2[0];
+            }
+        });
+        int location=0;
+        for(int i=0;i<tmp.length;i++){
+            for(int j=0;j<tmp[i][0];j++){
+                nums[location++]=tmp[i][1];
+            }
+        }
+        return nums;
+    }
+}

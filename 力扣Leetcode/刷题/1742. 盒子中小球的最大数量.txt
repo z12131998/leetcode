@@ -1,0 +1,21 @@
+class Solution {
+    public int countBalls(int lowLimit, int highLimit) {
+        int sum=0,max=Integer.MIN_VALUE;
+        int[] js = new int[6*9+1];
+        for(;lowLimit<=highLimit;lowLimit++){
+            int tmp=lowLimit;
+            sum=0;
+            while(tmp>0){
+                sum+=tmp%10;
+                tmp/=10;
+            }
+            js[sum]++;
+        }
+        for(int item: js){
+            if(item>max){
+                max=item;
+            }
+        }
+        return max;
+    }
+}

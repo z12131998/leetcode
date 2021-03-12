@@ -1,0 +1,68 @@
+class MyCircularQueue {
+    int[] node;
+    int head=-1,tail=-1,len=0;
+    public MyCircularQueue(int k) {
+        len=k+1;
+        node = new int[len]; 
+        head=0;
+        tail=0;
+    }
+    
+    public boolean enQueue(int value) {
+        if(isFull()){
+            return false;
+        }
+        node[tail]=value;
+        tail=(tail+1)%len;
+        return true;
+    }
+    
+    public boolean deQueue() {
+        if(isEmpty()){
+            return false;
+        }
+        head=(head+1)%len;
+        return true;
+    }
+    
+    public int Front() {
+        if(isEmpty()){
+            return -1;
+        }
+        return node[head];
+    }
+    
+    public int Rear() {
+          if(isEmpty()){
+            return -1;
+        }
+        return node[(tail-1+len)%len];//避免越过下标  加上len再取余
+    }
+    
+    public boolean isEmpty() {
+         if(head==tail){
+             return true;
+         }
+         return false;
+    }
+    
+    public boolean isFull() {
+       if((tail+1)%len==head){
+           //链表如果头在尾巴后面就是满的 tail+1%len==head 如果头在第一个就是0  
+           //那么尾巴在最后一个 需要余当前长度  
+           return true;
+       }
+       return false;
+    }
+}
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue obj = new MyCircularQueue(k);
+ * boolean param_1 = obj.enQueue(value);
+ * boolean param_2 = obj.deQueue();
+ * int param_3 = obj.Front();
+ * int param_4 = obj.Rear();
+ * boolean param_5 = obj.isEmpty();
+ * boolean param_6 = obj.isFull();
+ */

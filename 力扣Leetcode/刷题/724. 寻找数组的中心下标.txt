@@ -1,0 +1,20 @@
+class Solution {
+    public int pivotIndex(int[] nums) {
+        int res =-1,sum=0,tmpSum;
+        for(int item:nums){
+            sum+=item;
+        }
+        tmpSum=0;
+        //for(int i=nums.length-1;i>=0;i--){//爸爸笑了,倒着来居然不行 [-1,-1,0,0,-1,-1]
+        for(int i=0;i<nums.length;i++){
+            int sumTmp=sum-nums[i];
+            if(sumTmp==tmpSum){
+                res=i;
+                break;
+            }
+            sum-=nums[i];
+            tmpSum+=nums[i];
+        }
+        return res;
+    }
+}

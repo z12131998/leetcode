@@ -1,0 +1,18 @@
+
+class Solution {
+    public char slowestKey(int[] releaseTimes, String keysPressed) {
+        int resIndex=0,min=releaseTimes[0];
+        char res = keysPressed.charAt(resIndex);
+        for(int i=1;ireleaseTimes.length;i++){
+            if(releaseTimes[i]-releaseTimes[i-1]==min){
+                if(reskeysPressed.charAt(i)){
+                    res=keysPressed.charAt(i);
+                }
+            }else if(releaseTimes[i]-releaseTimes[i-1]min){
+                min=releaseTimes[i]-releaseTimes[i-1];
+                res=keysPressed.charAt(i);
+            }
+        }
+        return res;
+    }
+}

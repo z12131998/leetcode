@@ -1,0 +1,12 @@
+class Solution {
+    public int sumOddLengthSubarrays(int[] arr) {
+        int res =0;
+        for(int i=0;i<arr.length;i++){
+            int left=i+1,right=arr.length-i;
+            int left_ou = (left+1)/2,left_qi=left/2;
+            int right_ou=(right+1)/2,right_qi=right/2;
+            res+=((left_qi*right_qi)+(right_ou*left_ou))*arr[i];
+        }
+        return res;
+    }
+}

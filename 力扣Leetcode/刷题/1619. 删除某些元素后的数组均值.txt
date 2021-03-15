@@ -1,0 +1,13 @@
+class Solution {
+    public double trimMean(int[] arr) {
+        double sum = 0;
+        Arrays.sort(arr);
+        int length = arr.length;
+        int percentNum = length /20;
+        for (int i = percentNum; i < length - percentNum; i++) {
+            sum += arr[i];
+        }
+        double res = sum / (length - 2 * percentNum);
+        return res;
+    }
+}

@@ -1,0 +1,15 @@
+
+
+class Solution {
+    public int sumOddLengthSubarrays(int[] arr) {
+        int res = 0;
+        for(int i=0;i<arr.length;i++){
+            for(int j=1;j+i-1<arr.length;j+=2){//暴力计算 依次加上1 3 5 7等等
+            for(int k=0;k<j;k++){
+                res+=arr[k+i];
+            }
+            }
+            }
+        return res;
+    }
+}

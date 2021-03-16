@@ -1,0 +1,15 @@
+class Solution {
+    public int distanceBetweenBusStops(int[] distance, int start, int destination) {
+        int tmp1=0,tmp2=0;
+        int left = Math.min(start,destination);
+        int right = Math.max(start,destination);
+        for(int i=0;i<distance.length;i++){
+            if(i>=left&&i<right){
+                tmp2+=distance[i];
+            }else{
+                tmp1+=distance[i];
+            }
+        }
+        return tmp1>tmp2?tmp2:tmp1;
+    }
+}

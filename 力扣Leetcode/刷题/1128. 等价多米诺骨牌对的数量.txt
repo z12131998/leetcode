@@ -1,0 +1,18 @@
+class Solution {
+    public int numEquivDominoPairs(int[][] dominoes) {
+        int res=0;
+        int[] tmp = new int[2];
+        int[] A = new int[1000];
+        for(int i=0;i<dominoes.length;i++){
+            tmp[0]=dominoes[i][0];
+            tmp[1]=dominoes[i][1];
+            Arrays.sort(tmp);
+            if(A[tmp[0]*10+tmp[1]]!=0){
+                res+=A[tmp[0]*10+tmp[1]]++;
+            }else{
+               A[tmp[0]*10+tmp[1]]++;
+            }
+        }
+        return res;
+    }
+}

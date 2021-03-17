@@ -1,0 +1,22 @@
+class Solution {
+    public int findSpecialInteger(int[] arr) {
+        if(arr.length==1){
+            return arr[0];
+        }
+        int k = arr.length/4;
+        int res =0,max=0;
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]==arr[i-1]){
+                max++;
+                if(max>=k){
+                res=arr[i];
+                break;
+            }
+            }else{
+                max=0;
+            }
+
+        }
+        return res;
+    }
+}

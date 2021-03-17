@@ -1,0 +1,22 @@
+
+class Solution {
+    public int oddCells(int m, int n, int[][] indices) {
+        int row=0,cow=0;
+        int[] Trow= new int[m],Tcow= new int[n];
+        for(int[] item: indices){
+            Trow[item[0]]++;
+            Tcow[item[1]]++;
+        }
+        for(int item: Trow){
+            if(item%2==1){
+                row++;
+            }
+        }
+        for(int item: Tcow){
+            if(item%2==1){
+                cow++;
+            }
+        }
+        return row*n+cow*m-(row*cow*2);
+    }
+}

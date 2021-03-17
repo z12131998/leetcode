@@ -1,0 +1,24 @@
+class Solution {
+    public List<List<Integer>> shiftGrid(int[][] grid, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i=1;i<=k;i++){
+            int tmp = grid[grid.length-1][grid[0].length-1];
+            for(int j=0;j<grid.length;j++){
+                int tmp2=grid[j][grid[j].length-1];//获取最后一个
+                for(int k1=grid[j].length-1;k1>0;k1--){
+                    grid[j][k1]=grid[j][k1-1];
+                }
+                grid[j][0]=tmp;
+                tmp=tmp2;
+            }
+        }
+        for(int[] item: grid){
+            List<Integer> list = new ArrayList<>();
+            for(int item2: item){
+                list.add(item2);
+            }
+            res.add(list);
+        }
+        return res;
+    }
+}

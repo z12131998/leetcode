@@ -1,0 +1,13 @@
+class Solution {
+    public int minStartValue(int[] nums) {
+       int sum=0,res=0;
+       for(int item:nums){
+           sum+=item;
+            while(sum<1){
+                sum++;
+                res++;
+            }
+       } 
+       return res==0?1:res;
+    }
+}

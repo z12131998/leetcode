@@ -1,0 +1,37 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        if(head==null||head.next==null||k==0){
+            return head;
+        }
+        //只要找到倒数第几个节点，问题就解决一半了
+        ListNode slow=head,fast=head;//快慢指针 fast先走k步，如果到末尾了那么slow就是倒数第N个
+        int i=k,j=0;
+        while(i>0){//最终fast会先slow几步
+            while(fast!=null&&i>0){
+                fast=fast.next;
+                i--;
+                j++;
+            }
+            if(i>0){ //说明已经循环一次了 再开新的循环
+                fast=head;
+                while(i-j>j){
+                    i-=j;
+                }
+            }
+        }
+        if(fast==null){//已经到末尾了
+            return head;
+        }
+        ListNode tmpSlow=null,tmpFast=null;//保存他们的前一个
+        while(fast!=null){
+            tmpSlow=slow;
+            tmpFast=fast;
+            slow=slow.next;
+            fast=fast.next;//慢指针为头节点
+        }
+        tmpFast.next=head;
+        tmpSlow.next=null;
+        return slow;
+    }
+}
+返回该题

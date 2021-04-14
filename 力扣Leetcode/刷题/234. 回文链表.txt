@@ -1,0 +1,45 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if(head.next==null){
+            return true;//单节点是回文
+        }
+      //快慢指针,指向中心节点
+      ListNode fast=head,slow=head;
+      while(fast!=null){//快慢指针 无论如何慢指针都在中间,如果是偶数 那么在中间靠右
+          slow=slow.next;
+          if(fast.next==null){
+              break;
+          }else{
+              fast=fast.next.next;
+          }
+      }
+        //在这里 我们把后半部分转换,链表转换简单
+        ListNode prev = null;
+        while(slow!=null){
+            ListNode tmp = slow.next;
+            slow.next= prev;
+            prev=slow;
+            slow=tmp;
+        }
+
+        //在这里进行判断是否重复
+        while(prev!=null&&head!=null){
+            if(head.val!=prev.val){
+                return false;
+            }
+            head=head.next;
+            prev=prev.next;
+        }
+        return true;
+    }
+}

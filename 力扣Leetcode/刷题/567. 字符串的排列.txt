@@ -1,0 +1,46 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        if(s1.length()>s2.length()){
+            return false;
+        }
+        Counter windows = new Counter();
+        Counter need = new Counter();
+        int left=0,right=0,vaild=0;
+        for(int i=0;i<s1.length();i++){
+            need.add(s1.charAt(i),1);
+        }
+        while(right<s2.length()){
+            char c = s2.charAt(right);
+            if(need.containsKey(c)){
+                windows.add(c,1);
+                if(windows.get(c).intValue()==need.get(c).intValue()){
+                    vaild++;
+                }
+            }
+            right++;
+            while(right-left>=s1.length()){
+                if(vaild==need.size()){
+                    return true;
+                }
+                char d = s2.charAt(left);
+                left++;
+                if(need.containsKey(d)){
+                    if(need.get(d).intValue()==windows.get(d).intValue()){
+                        vaild--;
+                    }
+                    windows.add(d,-1);
+                }
+            }
+        }
+        return false;
+    }
+}
+
+class Counter extends HashMap<Character,Integer>{
+    public Integer get(Character k){
+        return containsKey(k)?super.get(k):0;
+    }
+    public void add(Character k,Integer v){
+        put(k,get(k)+v);
+    }
+}

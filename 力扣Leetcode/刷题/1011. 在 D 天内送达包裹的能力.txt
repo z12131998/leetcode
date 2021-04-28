@@ -1,0 +1,42 @@
+class Solution {
+    public int shipWithinDays(int[] weights, int D) {
+        int left=getMin(weights),right=getSum(weights);
+        while(left<=right){
+            int mid = left+(right-left)/2;
+            if(canFish(weights,D,mid)){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+
+    public boolean canFish(int[] weights,int D,int mid){
+        int i=0;
+        for(int day=1;day<=D;day++){
+            int maxcap = mid-weights[i];
+            while(maxcap>=0){
+                 i++;
+                if(i==weights.length){
+                    return true;
+                }
+                maxcap-=weights[i];
+            }
+        }
+         return false;
+    }
+
+    public int getSum(int[] weights){
+        int sum=0;
+        for(int i:weights)
+        sum+=i;
+        return sum;
+    }
+    public int getMin(int[] weights){
+        int min=weights[0];
+        for(int i =1;i<weights.length;i++)
+        min=Math.min(min,weights[i]);
+        return min;
+    }
+}

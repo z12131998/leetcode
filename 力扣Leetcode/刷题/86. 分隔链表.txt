@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode minX = new ListNode(0),maxX=new ListNode(0);  //一个死方法，这样会导致空间占用o(n)
+        ListNode tMinX=minX,tMaxX=maxX;
+        while(head!=null){
+            if(head.val<x){
+                minX.next=new ListNode(head.val);
+                minX=minX.next;
+            }else{
+                maxX.next=new ListNode(head.val);
+                maxX=maxX.next;
+            }
+            head=head.next;
+        }
+        minX.next=tMaxX.next;
+        return tMinX.next;
+    }
+}

@@ -1,0 +1,39 @@
+class Solution {
+    public int totalFruit(int[] tree) {
+        if(tree.length==1){
+            return 1;
+        }
+        int[] res = new int[2];
+        for(int i=0;i<tree.length;i++){
+            while(i>1&&i<tree.length&&tree[i]==tree[i-1]){
+                i++;
+            }//放前面
+            int tmp=1,tmp2=1,tmp3=-1;//严谨  tmp3=0吃了亏
+            int j=i+1,count=0;
+            while(j<tree.length){
+                if(count>1){
+                    break;
+                }
+                if(tree[i]==tree[j]){
+                    tmp++;
+                }else if(tmp3==tree[j]){
+                    tmp2++;
+                }else{
+                    count++;
+                    tmp3=tree[j];
+                        }
+                j++;
+            }
+            if(i==0&&j==tree.length){
+                if(tree[i]==tree[j-1]){
+                    return tree.length;
+                }
+            }
+            if(res[0]+res[1]<tmp+tmp2){
+                res[0]=tmp;
+                res[1]=tmp2;
+            }
+        }
+        return res[0]+res[1];
+    }
+}

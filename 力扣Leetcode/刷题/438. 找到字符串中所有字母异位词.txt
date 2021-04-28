@@ -1,0 +1,44 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        int left=0,right=0,vaild=0;
+        List<Integer> res = new ArrayList<Integer>();
+        Counter need = new Counter();
+        Counter windows = new Counter();
+        for(int i =0;i<p.length();i++){
+            need.add(p.charAt(i),1);
+        }
+        while(right<s.length()){
+            char c1 = s.charAt(right);
+            if(need.containsKey(c1)){
+                windows.add(c1,1);
+                if(windows.get(c1).intValue()==need.get(c1).intValue()){
+                    vaild++;
+                }
+            }
+            right++;
+
+            while(right-left>=p.length()){
+                if(vaild==need.size()){
+                    res.add(left);
+                }
+                char c2 = s.charAt(left);
+                left++;
+                if(need.containsKey(c2)){
+                    if(windows.get(c2).intValue()==need.get(c2).intValue())
+                    vaild--;
+                    windows.add(c2,-1);
+                }
+            }
+        }
+        return res;
+    }
+}
+
+class Counter extends HashMap<Character,Integer>{
+    public Integer get(Character k){
+        return containsKey(k)?super.get(k):0;
+    }
+    public void add(Character k,Integer v){
+        put(k,get(k)+v);
+    }
+}

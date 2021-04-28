@@ -1,0 +1,31 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int H) {
+        //我们只要找到最小速度就可以了
+        int left=1,right=getMax(piles);
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(canFish(piles,H,mid)){
+                right=mid-1;
+            }else{
+                left=mid+1;
+            }
+        }
+        return left;
+    }
+
+    public int getMax(int[] tmp){
+        int max=tmp[0];
+        for(int i=1;i<tmp.length;i++)
+        max=Math.max(max,tmp[i]);
+        return max;
+    }
+
+    public boolean canFish(int[] piles,int H,int mid){
+        int tmp=0;
+        for(int n:piles){
+            tmp+=n/mid;
+            tmp+=n%mid>0?1:0;
+        }
+        return tmp<=H;
+    }
+}

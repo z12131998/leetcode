@@ -1,0 +1,27 @@
+class Solution {
+    public int totalFruit(int[] tree) {
+        int left=0,max=0;
+        Counter count = new Counter();
+        for(int right=0;right<tree.length;++right){
+            count.add(tree[right],1);
+            while(count.size()>=3){
+                count.add(tree[left],-1);
+                if(count.get(tree[left])==0){
+                    count.remove(tree[left]);
+                }
+                left++;
+            }
+            max=Math.max(max,right-left+1);
+        }
+        return max;
+    }
+}
+class Counter extends HashMap<Integer, Integer> {
+    public int get(int k) {
+        return containsKey(k) ? super.get(k) : 0;
+    }
+
+    public void add(int k, int v) {
+        put(k, get(k) + v);
+    }
+}

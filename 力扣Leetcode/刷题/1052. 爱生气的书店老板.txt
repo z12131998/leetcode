@@ -1,0 +1,21 @@
+class Solution {
+    public int maxSatisfied(int[] customers, int[] grumpy, int X) {
+        int res =0,left=0,right=0,max=0,tmp=0;
+        //先找到生气最大的子段落,然后再加上生气的
+        for(int i=0;i<grumpy.length;i++){
+            if(grumpy[i]==0){
+                res+=customers[i];
+                customers[i]=0;
+            }
+        }
+        while(right<customers.length){
+            tmp+=customers[right];
+            right++;
+            if(right>X){
+            tmp-=customers[left];
+            left++;}
+            max=Math.max(max,tmp);
+        }
+        return res+max;
+    }
+}

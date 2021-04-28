@@ -1,0 +1,32 @@
+class Solution {
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() == 1){
+            return s;
+        }
+        String res = "";
+        //如果他是回文 那么 aba ->可以推出  cabac也是
+        for (int i = 0; i < s.length()-1; i++){
+           String tmp1 = isPalindromic(s,i,i);
+           if (tmp1.length() > res.length() ){
+               res = tmp1;
+           }
+
+           String tmp2 = isPalindromic(s,i,i+1);
+           if (tmp2.length() > res.length() ){
+               res = tmp2;
+           }
+        }
+        return res;
+    }
+    //判断是否为回文
+    public String isPalindromic(String s, int left, int right){
+        while (left >= 0 && right < s.length() ){
+            if (s.charAt(left) != s.charAt(right)){
+                break;
+            }
+            left--;
+            right++;
+        }
+        return s.substring(left+1,right);//substring左闭右开
+    }
+}

@@ -1,0 +1,35 @@
+class Solution {
+    public int countSubstrings(String s) {
+        if (s == null || s.equals(""))
+        return 0;
+        int len  = s.length(),res=0;
+        boolean[][] isPalindromic = new boolean[len][len];
+        
+        //那么这里可知他本身也算作回文
+        for (int i = 0; i < len; i++){
+            isPalindromic[i][i]=true;
+            res++;
+        }
+        //这里初始化DP数组的第二个值
+        for (int i = 0; i < len - 1; i++){
+            if ( s.charAt(i) == s.charAt(i+1) ){
+                res++;
+                isPalindromic[i][i+1]=true;
+            }
+        }
+
+        //如果他是回文，那么他里面的也应该是回文
+        //状态转移方程 f(i,j)=ture->f(i+1,j-1)=true
+        //tmp[i][j]=tmp[i+1][j-1]==true&&s[i]==s[j];  状态转移方程
+        for (int i = len-1;i >= 0; i--){
+            for (int j = i + 2; j < len; j++){
+                //为什么是判断i+2  我们初始值设置 不然就会造成lr->rl 二个一样的导致卡死
+                if (isPalindromic[i+1][j-1] && s.charAt(i)==s.charAt(j)){
+                    isPalindromic[i][j]=true;
+                    res++;
+                }
+            }
+        }
+        return res;  
+    }
+}

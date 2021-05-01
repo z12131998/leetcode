@@ -1,0 +1,18 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if ( target<matrix[0][0] || target > matrix[matrix.length-1][matrix[0].length-1]){
+            return false;
+        }
+        int row = matrix.length-1,cow = 0;
+        while ( row >= 0 && cow < matrix[0].length ){
+            if ( target == matrix[row][cow])
+            return true;
+            
+            if ( target > matrix[row][cow])
+            cow++;
+            else
+            row--;
+        }
+        return false;
+    }
+}

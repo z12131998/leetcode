@@ -1,0 +1,16 @@
+class Solution {
+    public int hIndex(int[] citations) {
+        int maxH= 0;
+        //与排序无关,那么让数组排序
+        Arrays.sort(citations);
+        for ( int i = 0; i < citations.length; i++){
+           // 我们假设每一次都是H指数,那么有h个文章被引用
+           int h = citations.length - i;
+           if( citations[i] >= h){ //判断最小的引用是否大于等于文章数量
+               maxH=h;
+               break;
+           }
+        }
+        return maxH;
+    }
+}

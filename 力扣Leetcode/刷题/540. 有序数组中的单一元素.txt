@@ -1,0 +1,33 @@
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        if (nums.length == 1){
+            return nums[0];
+        }
+        //都会出现二次 那么表示i是偶数数时候 i+1也是等于i 
+        //如果不等于 说明前面单数出现了问题
+        //这里考虑边界问题
+        //left 左边界 0如果是目标数 那么不会越界
+        //right右边界 nums.length-1如果是目标数,那么会出现边界越界的问题 也就是判断i+1,
+        //先我们直接找最后一个数是不是和前面一个数一样
+        if( nums[0]!=nums[1]){
+            return nums[0];
+        }
+
+        if ( nums[nums.length-1]!=nums[nums.length-2]){
+            return nums[nums.length-1];
+        }
+        int  left = 0, right =nums.length -2;
+        while ( left < right){
+            int mid = left + ( right - left) / 2;
+            mid = mid %2 ==1?mid -1:mid;
+            if ( nums[mid] ==nums[mid+1]){
+                left = mid +2;
+            }else{
+                right = mid;
+            }
+
+        }
+
+        return nums[left];
+    }
+}

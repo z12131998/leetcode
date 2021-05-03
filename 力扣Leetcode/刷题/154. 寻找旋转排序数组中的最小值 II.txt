@@ -1,0 +1,21 @@
+class Solution {
+    public int findMin(int[] nums) {
+        int res = nums[0];
+        int left =0,right = nums.length -1;
+
+        while ( left <= right){
+            int mid = left + (right - left ) / 2;
+            if ( nums[mid] == nums[right]){
+                right--;
+            }else if( nums[mid] < nums[right]){
+                res = Math.min(nums[mid],res);
+                right = mid - 1;
+            }else{
+                res = Math.min(res,nums[left]);
+                left = mid +1;
+            }
+        }
+        res=Math.min(res,nums[left]);
+        return res;
+    }
+}

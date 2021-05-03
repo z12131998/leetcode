@@ -1,0 +1,43 @@
+class Solution {
+    public int findRadius(int[] houses, int[] heaters) {
+        int res = 0;
+        if ( houses.length == 1 && heaters.length == 1){
+            return Math.abs(houses[0]-heaters[0]);
+        }
+        //这里忘记了数组其实并没有排序
+        //一定要记住给的条件是否说明排序了
+        Arrays.sort(heaters);
+        for (int i =0 ; i< houses.length ; i++){
+            int left = 0 ,right = heaters.length - 1;
+            int tmp = 1;
+            while ( left <= right){
+                int mid = left + (right - left ) / 2;
+                if ( houses[i] == heaters[mid]){
+                    tmp = 0;
+                    break;
+                }
+                if ( houses[i] < heaters[mid]){
+                    right = mid - 1;
+                }else{
+                    left = mid +1;
+                }
+            }
+            if( tmp == 0){//如果是0,那么是最小的 跳过诺
+               continue;
+            }
+            //最终left一定在房子的右边
+            if ( left !=0 && left != heaters.length){//越界判定
+                tmp = Math.min(
+                    Math.abs(heaters[left]-houses[i]),
+                    Math.abs(heaters[left-1] - houses[i])
+                );
+            }else if(left == heaters.length){
+                tmp = Math.abs(heaters[left-1]-houses[i]);
+            }else{
+                tmp = Math.abs(heaters[0]-houses[i]);
+            }
+            res =Math.max(res,tmp); 
+        }
+        return  res;
+    }
+}

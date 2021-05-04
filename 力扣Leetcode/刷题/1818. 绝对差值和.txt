@@ -1,0 +1,41 @@
+class Solution {
+    public int minAbsoluteSumDiff(int[] nums1, int[] nums2) {
+        //我是傻逼,总是越界,我是傻逼,总是溢出
+        long res =0;
+        int max = 0;
+        int[] sortNums1 = nums1.clone();
+        Arrays.sort(sortNums1);
+        //首先把他们的和加起来,然后记住最大值和下标XXXXXXX
+        //上面第一个思路错误了,要找到所有的的值,然后找最小的那一个
+        //然后排序nums1,替换找到绝对值最小的,我们找比nums[xiabiao]大一个的数,然后对比他前一个
+        //因为前一个的前一个,绝对值肯定大于啊
+        //然后加上替换后的,再减去原来的max
+        for ( int i = 0 ; i < nums1.length; i++){
+            int abs = Math.abs(nums1[i] - nums2[i]);
+            res = res + abs;
+            max = Math.max(max,abs- fun(sortNums1,nums2[i]));
+        }
+        res -=max;
+        res = res % 1000000007;
+        return (int) res; 
+    }
+    public int fun(int[] sortNums1,int targer){
+        int left = 0 ,right = sortNums1.length - 1;
+        while ( left + 1 < right){
+            int mid = left + (right - left) / 2;
+            if( sortNums1[mid] == targer){
+                return 0;
+            }
+            if ( sortNums1[mid] > targer){
+                right = mid;
+            }else{
+                left = mid + 1;
+            }
+        }
+        int tmp =Integer.MAX_VALUE;
+        if( left !=0){
+            tmp = Math.min(tmp,Math.abs(sortNums1[left-1] - targer));
+        }
+        return Math.min( tmp, Math.min(Math.abs(sortNums1[left] - targer),Math.abs(sortNums1[right] - targer)));
+    }
+}

@@ -1,0 +1,33 @@
+class Solution {
+    private class ResultType{
+    int singlePath;
+    int maxPath;
+    ResultType(int singlePath, int maxPath){
+        this.singlePath = singlePath;
+        this.maxPath = maxPath;
+    }
+}
+    public int maxPathSum(TreeNode root) {
+        //分治算法一律用后序遍历,首先找到左边最大的,后右边最大的,对比他们,找到最大的
+        //然后对比从当前节点出发,左右二边最大的值,再对比二边最大值
+        ResultType resultType = helper(root);
+        return resultType.maxPath;
+    }
+
+    private ResultType helper(TreeNode root){
+        if( root == null){
+            return new ResultType(0,Integer.MIN_VALUE);
+        }
+        ResultType left = helper(root.left);
+        ResultType right = helper(root.right);
+
+        int singlePath = Math.max(left.singlePath,right.singlePath) + root.val;
+        singlePath = Math.max(0,singlePath);
+
+        int maxPath = Math.max(left.maxPath,right.maxPath);
+        maxPath = Math.max(maxPath,( left.singlePath + right.singlePath + root.val));
+
+        return new ResultType(singlePath,maxPath);
+    }
+}
+

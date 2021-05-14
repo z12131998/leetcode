@@ -1,0 +1,26 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode mirrorTree(TreeNode root) {
+        return helper(root);
+    }
+    private TreeNode helper(TreeNode root){
+        if( root == null){
+            return null;
+        }
+        TreeNode tmp = null;
+        TreeNode left = helper(root.left);
+        TreeNode right = helper(root.right);
+        tmp = left;
+        root.left = right;
+        root.right = tmp;
+        return root;
+    }
+}

@@ -1,0 +1,41 @@
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        //找到最靠近x的k个数,我们只要找出X应该插入在数组的哪里
+        //然后从那个下标,左右查找把数组丢进list里面
+        LinkedList<Integer> res = new LinkedList<>();
+        int left = 0 ,right = arr.length - 1;
+        while ( left + 1 < right){
+            int mid = left + ( right - left ) / 2;
+            if ( arr[mid] >= x){
+                right = mid;
+            }else{
+                left = mid + 1;
+            }
+        }
+        int local = arr[left]>x?left:right;
+        left = 1;
+        right = 0;
+        for ( ;k > 0; k--){
+            if(local-left < 0){
+                res.add(arr[local + right]);
+                right++;
+                continue;
+            }
+            if(local + right >=arr.length){
+                res.addFirst(arr[local - left]);
+                left++;
+                continue;
+            }
+
+            if (Math.abs(arr[local -left] - x) > Math.abs(arr[local + right] - x)){
+                res.add(arr[local + right]);
+                right++;
+            }else{
+                res.addFirst(arr[local - left]);
+                left++;
+            }
+        }
+
+        return res;
+    }
+}

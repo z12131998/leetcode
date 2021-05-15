@@ -1,0 +1,33 @@
+class Solution {
+    public int jump(int[] nums) {
+        if ( nums.length <= 0){
+            return 0;
+        }
+        if ( nums.length == 1 ){
+            return 0;
+        }
+        int[] dp = new int[nums.length];
+        //使用dp[]记录最小的次数
+        //到最后的最小值,等于他前面能跳到最后的最小值+1;
+        for ( int i = 0 ; i < nums.length; i++){
+          for ( int j = 1; j <= nums[i]; j++){
+              if ( i + j >= nums.length -1){
+                  if ( dp[dp.length - 1] == 0){
+                      dp[dp.length - 1] = dp[i] + 1;
+                      continue;
+                  }
+                  dp[dp.length - 1] = Math.min(dp[i] + 1,dp[dp.length-1]);
+                  continue;
+              }
+              if ( dp[i + j] != 0){
+                  dp[i + j] = Math.min(dp[i]+1,dp[i+j]);
+              }else{
+                  dp[i + j] = dp[i] + 1; 
+              }
+
+          }
+        }
+
+        return dp[dp.length - 1];
+    }
+}

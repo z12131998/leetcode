@@ -1,0 +1,18 @@
+class Solution {
+    public int rob(int[] nums) {
+        if( nums.length == 1){
+            return nums[0];
+        }
+        if ( nums.length == 2){
+            return Math.max(nums[0],nums[1]);
+        }
+        int[] dp = new int[nums.length + 2];
+        //我们要偷最多的钱,如果我们偷了这个屋子,那么我们肯定可以偷上上个屋子
+        //如果我们不偷这个屋子,那么我们可以偷上一个屋子
+        //至此  推出状态方程 dp[i] = max(dp[i - 1],dp[i - 2] + dp[i]);
+        for ( int i = 2; i < dp.length; i++){
+            dp[i] = Math.max(dp[i - 1],dp[i - 2] + nums[i - 2]);
+        }
+        return dp[dp.length - 1];
+    }
+}
